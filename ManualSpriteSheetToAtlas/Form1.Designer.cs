@@ -30,15 +30,15 @@
 		{
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.panelOriginalImage = new System.Windows.Forms.Panel();
+			this.pictureBoxOriginalImage = new System.Windows.Forms.PictureBox();
 			this.panelZoom = new System.Windows.Forms.Panel();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.pictureBoxOriginalImage = new System.Windows.Forms.PictureBox();
 			this.panelOriginalImage.SuspendLayout();
-			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).BeginInit();
+			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// openFileDialog1
@@ -60,6 +60,23 @@
 			this.panelOriginalImage.Name = "panelOriginalImage";
 			this.panelOriginalImage.Size = new System.Drawing.Size(930, 710);
 			this.panelOriginalImage.TabIndex = 0;
+			// 
+			// pictureBoxOriginalImage
+			// 
+			this.pictureBoxOriginalImage.BackColor = System.Drawing.Color.White;
+			this.pictureBoxOriginalImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+			this.pictureBoxOriginalImage.Location = new System.Drawing.Point(0, 0);
+			this.pictureBoxOriginalImage.Name = "pictureBoxOriginalImage";
+			this.pictureBoxOriginalImage.Size = new System.Drawing.Size(930, 710);
+			this.pictureBoxOriginalImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			this.pictureBoxOriginalImage.TabIndex = 5;
+			this.pictureBoxOriginalImage.TabStop = false;
+			this.pictureBoxOriginalImage.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxOriginalImage_Paint);
+			this.pictureBoxOriginalImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxOriginalImage_MouseDown);
+			this.pictureBoxOriginalImage.MouseEnter += new System.EventHandler(this.pictureBoxOriginalImage_MouseEnter);
+			this.pictureBoxOriginalImage.MouseLeave += new System.EventHandler(this.pictureBoxOriginalImage_MouseLeave);
+			this.pictureBoxOriginalImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxOriginalImage_MouseMove);
+			this.pictureBoxOriginalImage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxOriginalImage_MouseUp);
 			// 
 			// panelZoom
 			// 
@@ -93,7 +110,7 @@
 			// openToolStripMenuItem
 			// 
 			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-			this.openToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+			this.openToolStripMenuItem.Size = new System.Drawing.Size(174, 38);
 			this.openToolStripMenuItem.Text = "Open";
 			this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
 			// 
@@ -106,23 +123,6 @@
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(250, 454);
 			this.panel1.TabIndex = 3;
-			// 
-			// pictureBoxOriginalImage
-			// 
-			this.pictureBoxOriginalImage.BackColor = System.Drawing.Color.White;
-			this.pictureBoxOriginalImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.pictureBoxOriginalImage.Location = new System.Drawing.Point(0, 0);
-			this.pictureBoxOriginalImage.Name = "pictureBoxOriginalImage";
-			this.pictureBoxOriginalImage.Size = new System.Drawing.Size(930, 710);
-			this.pictureBoxOriginalImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-			this.pictureBoxOriginalImage.TabIndex = 5;
-			this.pictureBoxOriginalImage.TabStop = false;
-			this.pictureBoxOriginalImage.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxOriginalImage_Paint);
-			this.pictureBoxOriginalImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxOriginalImage_MouseDown);
-			this.pictureBoxOriginalImage.MouseEnter += new System.EventHandler(this.pictureBoxOriginalImage_MouseEnter);
-			this.pictureBoxOriginalImage.MouseLeave += new System.EventHandler(this.pictureBoxOriginalImage_MouseLeave);
-			this.pictureBoxOriginalImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxOriginalImage_MouseMove);
-			this.pictureBoxOriginalImage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxOriginalImage_MouseUp);
 			// 
 			// Form1
 			// 
@@ -138,9 +138,9 @@
 			this.Text = "Manual Sprite Sheet to Atlas Creator";
 			this.panelOriginalImage.ResumeLayout(false);
 			this.panelOriginalImage.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).EndInit();
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
