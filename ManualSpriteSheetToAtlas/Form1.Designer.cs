@@ -35,7 +35,10 @@
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.pictureBoxOriginalImage = new System.Windows.Forms.PictureBox();
+			this.panelOriginalImage.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// openFileDialog1
@@ -49,8 +52,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelOriginalImage.AutoScroll = true;
-			this.panelOriginalImage.BackColor = System.Drawing.Color.White;
+			this.panelOriginalImage.BackColor = System.Drawing.Color.Transparent;
 			this.panelOriginalImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+			this.panelOriginalImage.Controls.Add(this.pictureBoxOriginalImage);
 			this.panelOriginalImage.Cursor = System.Windows.Forms.Cursors.Cross;
 			this.panelOriginalImage.Location = new System.Drawing.Point(12, 43);
 			this.panelOriginalImage.Name = "panelOriginalImage";
@@ -83,7 +87,7 @@
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-			this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 38);
+			this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 36);
 			this.fileToolStripMenuItem.Text = "File";
 			// 
 			// openToolStripMenuItem
@@ -103,6 +107,17 @@
 			this.panel1.Size = new System.Drawing.Size(250, 454);
 			this.panel1.TabIndex = 3;
 			// 
+			// pictureBoxOriginalImage
+			// 
+			this.pictureBoxOriginalImage.BackColor = System.Drawing.Color.White;
+			this.pictureBoxOriginalImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+			this.pictureBoxOriginalImage.Location = new System.Drawing.Point(0, 0);
+			this.pictureBoxOriginalImage.Name = "pictureBoxOriginalImage";
+			this.pictureBoxOriginalImage.Size = new System.Drawing.Size(930, 710);
+			this.pictureBoxOriginalImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+			this.pictureBoxOriginalImage.TabIndex = 5;
+			this.pictureBoxOriginalImage.TabStop = false;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -110,13 +125,16 @@
 			this.ClientSize = new System.Drawing.Size(1210, 765);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.panelZoom);
-			this.Controls.Add(this.panelOriginalImage);
 			this.Controls.Add(this.menuStrip1);
+			this.Controls.Add(this.panelOriginalImage);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "Form1";
 			this.Text = "Manual Sprite Sheet to Atlas Creator";
+			this.panelOriginalImage.ResumeLayout(false);
+			this.panelOriginalImage.PerformLayout();
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -130,6 +148,7 @@
 		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
 		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.PictureBox pictureBoxOriginalImage;
 	}
 }
 
