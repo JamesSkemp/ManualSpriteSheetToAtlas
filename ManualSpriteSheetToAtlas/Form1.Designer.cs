@@ -45,21 +45,25 @@
 			// 
 			// panelOriginalImage
 			// 
+			this.panelOriginalImage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.panelOriginalImage.AutoScroll = true;
 			this.panelOriginalImage.BackColor = System.Drawing.Color.White;
 			this.panelOriginalImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.panelOriginalImage.Dock = System.Windows.Forms.DockStyle.Left;
-			this.panelOriginalImage.Location = new System.Drawing.Point(0, 40);
+			this.panelOriginalImage.Location = new System.Drawing.Point(12, 43);
 			this.panelOriginalImage.Name = "panelOriginalImage";
-			this.panelOriginalImage.Size = new System.Drawing.Size(921, 725);
+			this.panelOriginalImage.Size = new System.Drawing.Size(930, 710);
 			this.panelOriginalImage.TabIndex = 0;
 			// 
 			// panelZoom
 			// 
+			this.panelZoom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelZoom.BackColor = System.Drawing.Color.White;
 			this.panelZoom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.panelZoom.Location = new System.Drawing.Point(948, 43);
 			this.panelZoom.Name = "panelZoom";
-			this.panelZoom.Size = new System.Drawing.Size(262, 262);
+			this.panelZoom.Size = new System.Drawing.Size(250, 250);
 			this.panelZoom.TabIndex = 1;
 			// 
 			// menuStrip1
@@ -90,10 +94,12 @@
 			// 
 			// panel1
 			// 
+			this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.panel1.BackColor = System.Drawing.Color.White;
-			this.panel1.Location = new System.Drawing.Point(948, 311);
+			this.panel1.Location = new System.Drawing.Point(948, 299);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(262, 454);
+			this.panel1.Size = new System.Drawing.Size(250, 454);
 			this.panel1.TabIndex = 3;
 			// 
 			// Form1
