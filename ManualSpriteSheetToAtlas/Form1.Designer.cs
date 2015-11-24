@@ -51,6 +51,7 @@
 			this.panelOriginalImage.AutoScroll = true;
 			this.panelOriginalImage.BackColor = System.Drawing.Color.White;
 			this.panelOriginalImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+			this.panelOriginalImage.Cursor = System.Windows.Forms.Cursors.Cross;
 			this.panelOriginalImage.Location = new System.Drawing.Point(12, 43);
 			this.panelOriginalImage.Name = "panelOriginalImage";
 			this.panelOriginalImage.Size = new System.Drawing.Size(930, 710);
