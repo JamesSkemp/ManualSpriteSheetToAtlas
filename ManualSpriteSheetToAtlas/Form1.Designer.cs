@@ -30,11 +30,11 @@
 		{
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.panelOriginalImage = new System.Windows.Forms.Panel();
-			this.panel2 = new System.Windows.Forms.Panel();
+			this.panelZoom = new System.Windows.Forms.Panel();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.panel1 = new System.Windows.Forms.Panel();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -48,20 +48,19 @@
 			this.panelOriginalImage.BackColor = System.Drawing.Color.White;
 			this.panelOriginalImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.panelOriginalImage.Dock = System.Windows.Forms.DockStyle.Left;
-			this.panelOriginalImage.Location = new System.Drawing.Point(0, 40);
+			this.panelOriginalImage.Location = new System.Drawing.Point(0, 42);
 			this.panelOriginalImage.Name = "panelOriginalImage";
-			this.panelOriginalImage.Size = new System.Drawing.Size(921, 725);
+			this.panelOriginalImage.Size = new System.Drawing.Size(921, 723);
 			this.panelOriginalImage.TabIndex = 0;
 			// 
-			// panel2
+			// panelZoom
 			// 
-			this.panel2.BackColor = System.Drawing.Color.White;
-			this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-			this.panel2.Location = new System.Drawing.Point(948, 40);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(262, 725);
-			this.panel2.TabIndex = 1;
+			this.panelZoom.BackColor = System.Drawing.Color.White;
+			this.panelZoom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+			this.panelZoom.Location = new System.Drawing.Point(948, 43);
+			this.panelZoom.Name = "panelZoom";
+			this.panelZoom.Size = new System.Drawing.Size(262, 262);
+			this.panelZoom.TabIndex = 1;
 			// 
 			// menuStrip1
 			// 
@@ -70,15 +69,14 @@
             this.fileToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1210, 40);
+			this.menuStrip1.Size = new System.Drawing.Size(1210, 42);
 			this.menuStrip1.TabIndex = 2;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.saveToolStripMenuItem});
+            this.openToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 38);
 			this.fileToolStripMenuItem.Text = "File";
@@ -90,18 +88,21 @@
 			this.openToolStripMenuItem.Text = "Open";
 			this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
 			// 
-			// saveToolStripMenuItem
+			// panel1
 			// 
-			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
-			this.saveToolStripMenuItem.Text = "Save";
+			this.panel1.BackColor = System.Drawing.Color.White;
+			this.panel1.Location = new System.Drawing.Point(948, 311);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(262, 454);
+			this.panel1.TabIndex = 3;
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1210, 765);
-			this.Controls.Add(this.panel2);
+			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.panelZoom);
 			this.Controls.Add(this.panelOriginalImage);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
@@ -117,11 +118,11 @@
 		#endregion
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
 		private System.Windows.Forms.Panel panelOriginalImage;
-		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.Panel panelZoom;
 		private System.Windows.Forms.MenuStrip menuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+		private System.Windows.Forms.Panel panel1;
 	}
 }
 
