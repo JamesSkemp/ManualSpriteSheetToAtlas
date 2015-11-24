@@ -63,7 +63,8 @@ namespace ManualSpriteSheetToAtlas
 				if (newImage != null)
 				{
 					originalImage = (Image)newImage.Clone();
-					zoomedImage = new Bitmap(panelZoom.Width, panelZoom.Height);
+
+					zoomedImage = new Bitmap(panelZoom.Width, panelZoom.Height, originalImage.PixelFormat);
 
 					pictureBoxOriginalImage.BackgroundImage = originalImage;
 					pictureBoxOriginalImage.Size = originalImage.Size;
@@ -88,6 +89,7 @@ namespace ManualSpriteSheetToAtlas
 
 				using (var graphics = Graphics.FromImage(croppedImage))
 				{
+					graphics.Clear(Color.White);
 					graphics.DrawImage(originalImage, zoomRectangle, sourceRectangle, GraphicsUnit.Pixel);
 				}
 
