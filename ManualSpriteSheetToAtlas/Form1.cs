@@ -63,5 +63,39 @@ namespace ManualSpriteSheetToAtlas
 
 			return imageLoaded;
 		}
+
+		private void pictureBoxOriginalImage_MouseDown(object sender, MouseEventArgs e)
+		{
+			// TODO start drawing our rectangle here
+		}
+
+		private void pictureBoxOriginalImage_MouseMove(object sender, MouseEventArgs e)
+		{
+			// TODO continue drawing our rectangle here, if they started drawing
+		}
+
+		private void pictureBoxOriginalImage_MouseUp(object sender, MouseEventArgs e)
+		{
+			// TODO finish drawing our rectangle here, if they started
+
+		}
+
+		private void pictureBoxOriginalImage_Paint(object sender, PaintEventArgs e)
+		{
+			// TODO drawi rectangle here
+
+		}
+
+		private void pictureBoxOriginalImage_MouseEnter(object sender, EventArgs e)
+		{
+			// TODO update preview/zoom display
+
+		}
+
+		private void pictureBoxOriginalImage_MouseLeave(object sender, EventArgs e)
+		{
+			// TODO update preview/zoom display
+
+		}
 	}
 }

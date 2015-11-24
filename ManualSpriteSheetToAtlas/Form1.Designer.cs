@@ -117,6 +117,12 @@
 			this.pictureBoxOriginalImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
 			this.pictureBoxOriginalImage.TabIndex = 5;
 			this.pictureBoxOriginalImage.TabStop = false;
+			this.pictureBoxOriginalImage.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxOriginalImage_Paint);
+			this.pictureBoxOriginalImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxOriginalImage_MouseDown);
+			this.pictureBoxOriginalImage.MouseEnter += new System.EventHandler(this.pictureBoxOriginalImage_MouseEnter);
+			this.pictureBoxOriginalImage.MouseLeave += new System.EventHandler(this.pictureBoxOriginalImage_MouseLeave);
+			this.pictureBoxOriginalImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxOriginalImage_MouseMove);
+			this.pictureBoxOriginalImage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxOriginalImage_MouseUp);
 			// 
 			// Form1
 			// 
