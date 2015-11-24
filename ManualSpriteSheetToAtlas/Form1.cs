@@ -13,27 +13,54 @@ namespace ManualSpriteSheetToAtlas
 {
 	public partial class Form1 : Form
 	{
+		private Image originalImage;
+
 		public Form1()
 		{
 			InitializeComponent();
 
-			if (openFileDialog1.ShowDialog() != DialogResult.OK)
+			if (!selectFile())
 			{
 				MessageBox.Show("You must select an image to continue.");
 
-				if (openFileDialog1.ShowDialog() != DialogResult.OK)
+				if (!selectFile())
 				{
 					// The user has failed twice; quit.
 					Application.Exit();
 				}
 			}
+		}
 
-			var imageFile = Image.FromFile(openFileDialog1.FileName);
-
-			if (imageFile != null)
+		private void openToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (MessageBox.Show("All unsaved progress will be lost.", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.OK)
 			{
-				panelOriginalImage.BackgroundImage = imageFile;
+				selectFile();
 			}
+		}
+
+		/// <summary>
+		/// Allow the user to select a file.
+		/// </summary>
+		/// <returns>True if the user selected a file.</returns>
+		private bool selectFile()
+		{
+			var imageLoaded = false;
+
+			if (openFileDialog1.ShowDialog() == DialogResult.OK)
+			{
+				var newImage = Image.FromFile(openFileDialog1.FileName);
+
+				if (newImage != null)
+				{
+					originalImage = (Image)newImage.Clone();
+
+					panelOriginalImage.BackgroundImage = originalImage;
+					imageLoaded = true;
+				}
+			}
+
+			return imageLoaded;
 		}
 	}
 }
