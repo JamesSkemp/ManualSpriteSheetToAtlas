@@ -74,6 +74,9 @@ namespace ManualSpriteSheetToAtlas
 			return imageLoaded;
 		}
 
+		/// <summary>
+		/// Update the zoomed-in view of the user's cursor.
+		/// </summary>
 		private void updateZoomView()
 		{
 			if (zoomedImage != null)
@@ -118,49 +121,11 @@ namespace ManualSpriteSheetToAtlas
 
 		private void pictureBoxOriginalImage_MouseEnter(object sender, EventArgs e)
 		{
-
-			// TODO update preview/zoom display
-			//panelZoom.BackgroundImage = new Bitmap(
 			updateZoomView();
-
-			/*
-
-			RectangleF destinationRect = new RectangleF(
-    150,
-    20,
-    1.3f * width,
-    1.3f * height);
-
-// Draw a portion of the image. Scale that portion of the image
-// so that it fills the destination rectangle.
-RectangleF sourceRect = new RectangleF(0, 0, .75f * width, .75f * height);
-e.Graphics.DrawImage(
-    image,
-    destinationRect,
-    sourceRect,
-    GraphicsUnit.Pixel);
-
-			*/
-
-
-			/*
-			// Create a Bitmap object from a file.
-Bitmap myBitmap = new Bitmap("Grapes.jpg");
-
-// Clone a portion of the Bitmap object.
-Rectangle cloneRect = new Rectangle(0, 0, 100, 100);
-System.Drawing.Imaging.PixelFormat format =
-    myBitmap.PixelFormat;
-Bitmap cloneBitmap = myBitmap.Clone(cloneRect, format);
-
-// Draw the cloned portion of the Bitmap object.
-e.Graphics.DrawImage(cloneBitmap, 0, 0);
-	*/
 		}
 
 		private void pictureBoxOriginalImage_MouseLeave(object sender, EventArgs e)
 		{
-			// TODO update preview/zoom display
 			panelZoom.BackgroundImage = null;
 		}
 	}
