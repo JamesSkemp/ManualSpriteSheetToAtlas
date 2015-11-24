@@ -56,6 +56,7 @@ namespace ManualSpriteSheetToAtlas
 					originalImage = (Image)newImage.Clone();
 
 					panelOriginalImage.BackgroundImage = originalImage;
+					panelOriginalImage.AutoScrollMinSize = panelOriginalImage.BackgroundImage.Size;
 					imageLoaded = true;
 				}
 			}
