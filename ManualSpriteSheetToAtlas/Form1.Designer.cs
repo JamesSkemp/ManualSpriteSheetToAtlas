@@ -48,9 +48,9 @@
 			this.panelOriginalImage.BackColor = System.Drawing.Color.White;
 			this.panelOriginalImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.panelOriginalImage.Dock = System.Windows.Forms.DockStyle.Left;
-			this.panelOriginalImage.Location = new System.Drawing.Point(0, 42);
+			this.panelOriginalImage.Location = new System.Drawing.Point(0, 40);
 			this.panelOriginalImage.Name = "panelOriginalImage";
-			this.panelOriginalImage.Size = new System.Drawing.Size(921, 723);
+			this.panelOriginalImage.Size = new System.Drawing.Size(921, 725);
 			this.panelOriginalImage.TabIndex = 0;
 			// 
 			// panelZoom
@@ -69,7 +69,7 @@
             this.fileToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1210, 42);
+			this.menuStrip1.Size = new System.Drawing.Size(1210, 40);
 			this.menuStrip1.TabIndex = 2;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -107,7 +107,7 @@
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "Form1";
-			this.Text = "Form1";
+			this.Text = "Manual Sprite Sheet to Atlas Creator";
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);
