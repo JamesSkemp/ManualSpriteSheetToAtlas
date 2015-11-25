@@ -13,9 +13,18 @@ namespace ManualSpriteSheetToAtlas
 {
 	public partial class Form1 : Form
 	{
+		/// <summary>
+		/// Original image the user selected.
+		/// </summary>
 		private Image originalImage;
+		/// <summary>
+		/// Image displayed by the main display.
+		/// </summary>
+		private Bitmap displayedImage;
+
 		private Bitmap zoomedImage;
 		private Bitmap croppedImage;
+
 		private Point pictureCursorPosition;
 
 		private Rectangle sourceRectangle;
@@ -70,13 +79,34 @@ namespace ManualSpriteSheetToAtlas
 
 					zoomedImage = new Bitmap(panelZoom.Width, panelZoom.Height, originalImage.PixelFormat);
 
-					pictureBoxOriginalImage.BackgroundImage = originalImage;
-					pictureBoxOriginalImage.Size = originalImage.Size;
-					imageLoaded = true;
+					imageLoaded = displayMainImage();
 				}
 			}
 
 			return imageLoaded;
+		}
+
+		/// <summary>
+		/// Displays the main image.
+		/// </summary>
+		/// <returns>True if the image is displayed.</returns>
+		private bool displayMainImage()
+		{
+			var imageDisplayed = false;
+
+			if (originalImage != null)
+			{
+				displayedImage = new Bitmap(originalImage, originalImage.Width * zoomFactor, originalImage.Height * zoomFactor);
+
+				pictureBoxOriginalImage.BackgroundImage = displayedImage;
+				pictureBoxOriginalImage.Size = displayedImage.Size;
+
+				pictureBoxOriginalImage.Invalidate();
+
+				imageDisplayed = true;
+			}
+
+			return imageDisplayed;
 		}
 
 		/// <summary>
@@ -159,15 +189,7 @@ namespace ManualSpriteSheetToAtlas
 			if (MessageBox.Show("Currently, all unsaved progress will be lost.", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.OK)
 			{
 				// TODO update all existing rectangles accordingly.
-				if (originalImage != null)
-				{
-					var newImage = new Bitmap(originalImage, originalImage.Width * zoomFactor, originalImage.Height * zoomFactor);
-
-					pictureBoxOriginalImage.BackgroundImage = newImage;
-					pictureBoxOriginalImage.Size = newImage.Size;
-
-					pictureBoxOriginalImage.Invalidate();
-				}
+				displayMainImage();
 			}
 
 			// You can't zoom out any further than the original size.
