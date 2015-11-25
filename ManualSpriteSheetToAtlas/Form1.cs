@@ -53,6 +53,14 @@ namespace ManualSpriteSheetToAtlas
 		/// Point user stopped drawing on the image, based upon original image.
 		/// </summary>
 		private Point drawingEnd;
+		/// <summary>
+		/// Temporary point for drawing.
+		/// </summary>
+		private Point drawingTempPoint;
+		/// <summary>
+		/// Rectangle of the user's current drawing.
+		/// </summary>
+		private Rectangle currentDrawingRectangle;
 
 		public Form1()
 		{
@@ -182,9 +190,7 @@ namespace ManualSpriteSheetToAtlas
 
 		private void pictureBoxOriginalImage_MouseDown(object sender, MouseEventArgs e)
 		{
-			drawingStart = pictureBoxOriginalImage.PointToClient(Cursor.Position);
-			drawingStart.X /= zoomFactor;
-			drawingStart.Y /= zoomFactor;
+			drawingStart = getDrawingCursor();
 			isDrawing = true;
 			// TODO start drawing our rectangle here
 		}
@@ -194,6 +200,7 @@ namespace ManualSpriteSheetToAtlas
 			updateZoomView();
 			if (isDrawing)
 			{
+				drawingTempPoint = getDrawingCursor();
 				// TODO continue drawing our rectangle here, if they started drawing
 
 			}
@@ -204,9 +211,7 @@ namespace ManualSpriteSheetToAtlas
 			// TODO finish drawing our rectangle here, if they started
 			if (isDrawing)
 			{
-				drawingEnd = pictureBoxOriginalImage.PointToClient(Cursor.Position);
-				drawingEnd.X /= zoomFactor;
-				drawingEnd.Y /= zoomFactor;
+				drawingEnd = getDrawingCursor();
 
 				saveDrawing();
 
@@ -285,6 +290,21 @@ namespace ManualSpriteSheetToAtlas
 			}
 
 			return dataSaved;
+		}
+
+		/// <summary>
+		/// Gets the position of the cursor relative to the original image.
+		/// </summary>
+		/// <returns>Cursor position within original image, accounting for zoom.</returns>
+		private Point getDrawingCursor()
+		{
+			Point cursor = Point.Empty;
+
+			cursor = pictureBoxOriginalImage.PointToClient(Cursor.Position);
+			cursor.X /= zoomFactor;
+			cursor.Y /= zoomFactor;
+
+			return cursor;
 		}
 	}
 }
