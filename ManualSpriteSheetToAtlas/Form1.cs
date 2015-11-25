@@ -31,10 +31,16 @@ namespace ManualSpriteSheetToAtlas
 		private Rectangle zoomRectangle;
 
 		private int zoomFactor = 1;
+		/// <summary>
+		/// Cursor position, with zoom factor taken into account.
+		/// </summary>
+		private Point finalCursorPosition;
 
 		public Form1()
 		{
 			InitializeComponent();
+
+			setupInterfaceDefaults();
 
 			if (!selectFile())
 			{
@@ -49,8 +55,20 @@ namespace ManualSpriteSheetToAtlas
 
 			zoomRectangle = new Rectangle(0, 0, panelZoom.Width, panelZoom.Height);
 			croppedImage = new Bitmap(zoomRectangle.Width, zoomRectangle.Height);
+		}
+
+		/// <summary>
+		/// Update the interface with a few defaults.
+		/// </summary>
+		private void setupInterfaceDefaults()
+		{
 			// We can't zoom out by default, since the factor will be set to 1.
 			outToolStripMenuItem.Enabled = false;
+			// Clear the text we drop into place to help with development.
+			toolStripStatusLabelCursor.Text = toolStripStatusLabelImageSize.Text
+				= string.Empty;
+
+			toolStripStatusLabelZoom.Text = string.Format("Zoom: {0}", zoomFactor);
 		}
 
 		private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -105,6 +123,8 @@ namespace ManualSpriteSheetToAtlas
 
 				pictureBoxOriginalImage.Invalidate();
 
+				toolStripStatusLabelImageSize.Text = string.Format("Image size: {0}", originalImage.Size.ToString());
+
 				imageDisplayed = true;
 			}
 
@@ -120,8 +140,13 @@ namespace ManualSpriteSheetToAtlas
 			{
 				pictureCursorPosition = pictureBoxOriginalImage.PointToClient(Cursor.Position);
 
+				finalCursorPosition.X = pictureCursorPosition.X / zoomFactor;
+				finalCursorPosition.Y = pictureCursorPosition.Y / zoomFactor;
+
+				toolStripStatusLabelCursor.Text = string.Format("Cursor: {0}", finalCursorPosition);
+
 				// Update the zoom panel, which is 250 x 250, so display 10x10 around cursor.
-				sourceRectangle = new Rectangle(pictureCursorPosition.X / zoomFactor, pictureCursorPosition.Y / zoomFactor, 10, 10);
+				sourceRectangle = new Rectangle(finalCursorPosition.X, finalCursorPosition.Y, 10, 10);
 
 				using (var graphics = Graphics.FromImage(croppedImage))
 				{
@@ -169,18 +194,24 @@ namespace ManualSpriteSheetToAtlas
 
 		private void inToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			zoomFactor += 1;
-			zoomOriginal();
+			if (MessageBox.Show("Currently, all unsaved progress will be lost.", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.OK)
+			{
+				zoomFactor += 1;
+				zoomOriginal();
+			}
 		}
 
 		private void outToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			zoomFactor -= 1;
-			if (zoomFactor < 1)
+			if (MessageBox.Show("Currently, all unsaved progress will be lost.", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.OK)
 			{
-				zoomFactor = 1;
+				zoomFactor -= 1;
+				if (zoomFactor < 1)
+				{
+					zoomFactor = 1;
+				}
+				zoomOriginal();
 			}
-			zoomOriginal();
 		}
 
 		/// <summary>
@@ -188,11 +219,10 @@ namespace ManualSpriteSheetToAtlas
 		/// </summary>
 		private void zoomOriginal()
 		{
-			if (MessageBox.Show("Currently, all unsaved progress will be lost.", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.OK)
-			{
-				// TODO update all existing rectangles accordingly.
-				displayMainImage();
-			}
+			toolStripStatusLabelZoom.Text = string.Format("Zoom: {0}", zoomFactor);
+
+			// TODO update all existing rectangles accordingly.
+			displayMainImage();
 
 			// You can't zoom out any further than the original size.
 			outToolStripMenuItem.Enabled = zoomFactor > 1;
