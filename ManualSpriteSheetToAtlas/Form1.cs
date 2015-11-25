@@ -21,6 +21,8 @@ namespace ManualSpriteSheetToAtlas
 		private Rectangle sourceRectangle;
 		private Rectangle zoomRectangle;
 
+		private int zoomFactor = 1;
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -38,6 +40,8 @@ namespace ManualSpriteSheetToAtlas
 
 			zoomRectangle = new Rectangle(0, 0, panelZoom.Width, panelZoom.Height);
 			croppedImage = new Bitmap(zoomRectangle.Width, zoomRectangle.Height);
+			// We can't zoom out by default, since the factor will be set to 1.
+			outToolStripMenuItem.Enabled = false;
 		}
 
 		private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -129,6 +133,45 @@ namespace ManualSpriteSheetToAtlas
 		private void pictureBoxOriginalImage_MouseLeave(object sender, EventArgs e)
 		{
 			panelZoom.BackgroundImage = null;
+		}
+
+		private void inToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			zoomFactor += 1;
+			zoomOriginal();
+		}
+
+		private void outToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			zoomFactor -= 1;
+			if (zoomFactor < 1)
+			{
+				zoomFactor = 1;
+			}
+			zoomOriginal();
+		}
+
+		/// <summary>
+		/// Update the original image with the current zoom factor.
+		/// </summary>
+		private void zoomOriginal()
+		{
+			if (MessageBox.Show("Currently, all unsaved progress will be lost.", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.OK)
+			{
+				// TODO update all existing rectangles accordingly.
+				if (originalImage != null)
+				{
+					var newImage = new Bitmap(originalImage, originalImage.Width * zoomFactor, originalImage.Height * zoomFactor);
+
+					pictureBoxOriginalImage.BackgroundImage = newImage;
+					pictureBoxOriginalImage.Size = newImage.Size;
+
+					pictureBoxOriginalImage.Invalidate();
+				}
+			}
+
+			// You can't zoom out any further than the original size.
+			outToolStripMenuItem.Enabled = zoomFactor > 1;
 		}
 	}
 }
