@@ -35,14 +35,15 @@
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.panel1 = new System.Windows.Forms.Panel();
 			this.zoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.inToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.outToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.panel1 = new System.Windows.Forms.Panel();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabelCursor = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatusLabelImageSize = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatusLabelZoom = new System.Windows.Forms.ToolStripStatusLabel();
+			this.textBoxOutput = new System.Windows.Forms.TextBox();
 			this.panelOriginalImage.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).BeginInit();
 			this.menuStrip1.SuspendLayout();
@@ -104,7 +105,7 @@
             this.zoomToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1210, 42);
+			this.menuStrip1.Size = new System.Drawing.Size(1210, 40);
 			this.menuStrip1.TabIndex = 2;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -120,9 +121,34 @@
 			// 
 			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
 			this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-			this.openToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
+			this.openToolStripMenuItem.Size = new System.Drawing.Size(260, 38);
 			this.openToolStripMenuItem.Text = "Open";
 			this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+			// 
+			// zoomToolStripMenuItem
+			// 
+			this.zoomToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.inToolStripMenuItem,
+            this.outToolStripMenuItem});
+			this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
+			this.zoomToolStripMenuItem.Size = new System.Drawing.Size(90, 36);
+			this.zoomToolStripMenuItem.Text = "Zoom";
+			// 
+			// inToolStripMenuItem
+			// 
+			this.inToolStripMenuItem.Name = "inToolStripMenuItem";
+			this.inToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.I)));
+			this.inToolStripMenuItem.Size = new System.Drawing.Size(233, 38);
+			this.inToolStripMenuItem.Text = "In";
+			this.inToolStripMenuItem.Click += new System.EventHandler(this.inToolStripMenuItem_Click);
+			// 
+			// outToolStripMenuItem
+			// 
+			this.outToolStripMenuItem.Name = "outToolStripMenuItem";
+			this.outToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.O)));
+			this.outToolStripMenuItem.Size = new System.Drawing.Size(233, 38);
+			this.outToolStripMenuItem.Text = "Out";
+			this.outToolStripMenuItem.Click += new System.EventHandler(this.outToolStripMenuItem_Click);
 			// 
 			// panel1
 			// 
@@ -131,33 +157,8 @@
 			this.panel1.BackColor = System.Drawing.Color.White;
 			this.panel1.Location = new System.Drawing.Point(948, 299);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(250, 490);
+			this.panel1.Size = new System.Drawing.Size(250, 250);
 			this.panel1.TabIndex = 3;
-			// 
-			// zoomToolStripMenuItem
-			// 
-			this.zoomToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.inToolStripMenuItem,
-            this.outToolStripMenuItem});
-			this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
-			this.zoomToolStripMenuItem.Size = new System.Drawing.Size(90, 38);
-			this.zoomToolStripMenuItem.Text = "Zoom";
-			// 
-			// inToolStripMenuItem
-			// 
-			this.inToolStripMenuItem.Name = "inToolStripMenuItem";
-			this.inToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.I)));
-			this.inToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
-			this.inToolStripMenuItem.Text = "In";
-			this.inToolStripMenuItem.Click += new System.EventHandler(this.inToolStripMenuItem_Click);
-			// 
-			// outToolStripMenuItem
-			// 
-			this.outToolStripMenuItem.Name = "outToolStripMenuItem";
-			this.outToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.O)));
-			this.outToolStripMenuItem.Size = new System.Drawing.Size(269, 38);
-			this.outToolStripMenuItem.Text = "Out";
-			this.outToolStripMenuItem.Click += new System.EventHandler(this.outToolStripMenuItem_Click);
 			// 
 			// statusStrip1
 			// 
@@ -175,26 +176,36 @@
 			// toolStripStatusLabelCursor
 			// 
 			this.toolStripStatusLabelCursor.Name = "toolStripStatusLabelCursor";
-			this.toolStripStatusLabelCursor.Size = new System.Drawing.Size(80, 33);
+			this.toolStripStatusLabelCursor.Size = new System.Drawing.Size(80, 32);
 			this.toolStripStatusLabelCursor.Text = "cursor";
 			// 
 			// toolStripStatusLabelImageSize
 			// 
 			this.toolStripStatusLabelImageSize.Name = "toolStripStatusLabelImageSize";
-			this.toolStripStatusLabelImageSize.Size = new System.Drawing.Size(55, 33);
+			this.toolStripStatusLabelImageSize.Size = new System.Drawing.Size(55, 32);
 			this.toolStripStatusLabelImageSize.Text = "size";
 			// 
 			// toolStripStatusLabelZoom
 			// 
 			this.toolStripStatusLabelZoom.Name = "toolStripStatusLabelZoom";
-			this.toolStripStatusLabelZoom.Size = new System.Drawing.Size(75, 33);
+			this.toolStripStatusLabelZoom.Size = new System.Drawing.Size(75, 32);
 			this.toolStripStatusLabelZoom.Text = "zoom";
+			// 
+			// textBoxOutput
+			// 
+			this.textBoxOutput.Location = new System.Drawing.Point(948, 555);
+			this.textBoxOutput.Multiline = true;
+			this.textBoxOutput.Name = "textBoxOutput";
+			this.textBoxOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.textBoxOutput.Size = new System.Drawing.Size(250, 234);
+			this.textBoxOutput.TabIndex = 5;
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1210, 839);
+			this.Controls.Add(this.textBoxOutput);
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.panelZoom);
@@ -231,6 +242,7 @@
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCursor;
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelImageSize;
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelZoom;
+		private System.Windows.Forms.TextBox textBoxOutput;
 	}
 }
 

@@ -41,6 +41,19 @@ namespace ManualSpriteSheetToAtlas
 		/// </summary>
 		private bool hasUnsavedChanges;
 
+		/// <summary>
+		/// The user is actively drawing a rectangle.
+		/// </summary>
+		private bool isDrawing;
+		/// <summary>
+		/// Point user started drawing on the image, based upon original image.
+		/// </summary>
+		private Point drawingStart;
+		/// <summary>
+		/// Point user stopped drawing on the image, based upon original image.
+		/// </summary>
+		private Point drawingEnd;
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -130,7 +143,10 @@ namespace ManualSpriteSheetToAtlas
 
 				toolStripStatusLabelImageSize.Text = string.Format("Image size: {0}", originalImage.Size.ToString());
 
+				textBoxOutput.Text = "";
+
 				imageDisplayed = true;
+				hasUnsavedChanges = false;
 			}
 
 			return imageDisplayed;
@@ -166,19 +182,36 @@ namespace ManualSpriteSheetToAtlas
 
 		private void pictureBoxOriginalImage_MouseDown(object sender, MouseEventArgs e)
 		{
+			drawingStart = pictureBoxOriginalImage.PointToClient(Cursor.Position);
+			drawingStart.X /= zoomFactor;
+			drawingStart.Y /= zoomFactor;
+			isDrawing = true;
 			// TODO start drawing our rectangle here
 		}
 
 		private void pictureBoxOriginalImage_MouseMove(object sender, MouseEventArgs e)
 		{
-			// TODO continue drawing our rectangle here, if they started drawing
 			updateZoomView();
+			if (isDrawing)
+			{
+				// TODO continue drawing our rectangle here, if they started drawing
+
+			}
 		}
 
 		private void pictureBoxOriginalImage_MouseUp(object sender, MouseEventArgs e)
 		{
 			// TODO finish drawing our rectangle here, if they started
+			if (isDrawing)
+			{
+				drawingEnd = pictureBoxOriginalImage.PointToClient(Cursor.Position);
+				drawingEnd.X /= zoomFactor;
+				drawingEnd.Y /= zoomFactor;
 
+				saveDrawing();
+
+				isDrawing = false;
+			}
 		}
 
 		private void pictureBoxOriginalImage_Paint(object sender, PaintEventArgs e)
@@ -231,6 +264,27 @@ namespace ManualSpriteSheetToAtlas
 
 			// You can't zoom out any further than the original size.
 			outToolStripMenuItem.Enabled = zoomFactor > 1;
+		}
+
+		/// <summary>
+		/// Save the currently drawn points.
+		/// </summary>
+		/// <returns>True if data is saved.</returns>
+		private bool saveDrawing()
+		{
+			bool dataSaved = false;
+
+			if (!drawingStart.IsEmpty || !drawingEnd.IsEmpty)
+			{
+				textBoxOutput.Text += string.Format("{0} x {1}", drawingStart, drawingEnd);
+
+				hasUnsavedChanges = true;
+
+				drawingStart = Point.Empty;
+				drawingEnd = Point.Empty;
+			}
+
+			return dataSaved;
 		}
 	}
 }
