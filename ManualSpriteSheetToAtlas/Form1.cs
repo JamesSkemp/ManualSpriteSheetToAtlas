@@ -80,6 +80,8 @@ namespace ManualSpriteSheetToAtlas
 					zoomedImage = new Bitmap(panelZoom.Width, panelZoom.Height, originalImage.PixelFormat);
 
 					imageLoaded = displayMainImage();
+
+					newImage.Dispose();
 				}
 			}
 
@@ -119,7 +121,7 @@ namespace ManualSpriteSheetToAtlas
 				pictureCursorPosition = pictureBoxOriginalImage.PointToClient(Cursor.Position);
 
 				// Update the zoom panel, which is 250 x 250, so display 10x10 around cursor.
-				sourceRectangle = new Rectangle(pictureCursorPosition.X, pictureCursorPosition.Y, 10, 10);
+				sourceRectangle = new Rectangle(pictureCursorPosition.X / zoomFactor, pictureCursorPosition.Y / zoomFactor, 10, 10);
 
 				using (var graphics = Graphics.FromImage(croppedImage))
 				{
