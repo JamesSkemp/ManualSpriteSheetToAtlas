@@ -36,6 +36,11 @@ namespace ManualSpriteSheetToAtlas
 		/// </summary>
 		private Point finalCursorPosition;
 
+		/// <summary>
+		/// There are unsaved changes.
+		/// </summary>
+		private bool hasUnsavedChanges;
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -73,7 +78,7 @@ namespace ManualSpriteSheetToAtlas
 
 		private void openToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (MessageBox.Show("All unsaved progress will be lost.", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.OK)
+			if (!hasUnsavedChanges || MessageBox.Show("All unsaved progress will be lost.", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.OK)
 			{
 				selectFile();
 			}
@@ -194,7 +199,7 @@ namespace ManualSpriteSheetToAtlas
 
 		private void inToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (MessageBox.Show("Currently, all unsaved progress will be lost.", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.OK)
+			if (!hasUnsavedChanges || MessageBox.Show("Currently, all unsaved progress will be lost.", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.OK)
 			{
 				zoomFactor += 1;
 				zoomOriginal();
@@ -203,7 +208,7 @@ namespace ManualSpriteSheetToAtlas
 
 		private void outToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (MessageBox.Show("Currently, all unsaved progress will be lost.", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.OK)
+			if (!hasUnsavedChanges || MessageBox.Show("Currently, all unsaved progress will be lost.", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.OK)
 			{
 				zoomFactor -= 1;
 				if (zoomFactor < 1)
