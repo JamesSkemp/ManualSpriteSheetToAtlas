@@ -125,6 +125,9 @@ namespace ManualSpriteSheetToAtlas
 
 					imageLoaded = displayMainImage();
 
+					// They've loaded an image, so clear the output if there is any.
+					textBoxOutput.Text = "";
+
 					newImage.Dispose();
 				}
 			}
@@ -150,8 +153,6 @@ namespace ManualSpriteSheetToAtlas
 				pictureBoxOriginalImage.Invalidate();
 
 				toolStripStatusLabelImageSize.Text = string.Format("Image size: {0}", originalImage.Size.ToString());
-
-				textBoxOutput.Text = "";
 
 				imageDisplayed = true;
 				hasUnsavedChanges = false;
@@ -237,24 +238,18 @@ namespace ManualSpriteSheetToAtlas
 
 		private void inToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (!hasUnsavedChanges || MessageBox.Show("Currently, all unsaved progress will be lost.", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.OK)
-			{
-				zoomFactor += 1;
-				zoomOriginal();
-			}
+			zoomFactor += 1;
+			zoomOriginal();
 		}
 
 		private void outToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (!hasUnsavedChanges || MessageBox.Show("Currently, all unsaved progress will be lost.", "Are you sure?", MessageBoxButtons.OKCancel) == DialogResult.OK)
+			zoomFactor -= 1;
+			if (zoomFactor < 1)
 			{
-				zoomFactor -= 1;
-				if (zoomFactor < 1)
-				{
-					zoomFactor = 1;
-				}
-				zoomOriginal();
+				zoomFactor = 1;
 			}
+			zoomOriginal();
 		}
 
 		/// <summary>
