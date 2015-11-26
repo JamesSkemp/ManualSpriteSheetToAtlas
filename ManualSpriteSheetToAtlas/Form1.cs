@@ -276,6 +276,8 @@ namespace ManualSpriteSheetToAtlas
 
 			if (!drawingStart.IsEmpty || !drawingEnd.IsEmpty)
 			{
+				fixDrawingPoints();
+
 				textBoxOutput.Text += string.Format("{0} x {1}", drawingStart, drawingEnd);
 
 				hasUnsavedChanges = true;
@@ -285,6 +287,48 @@ namespace ManualSpriteSheetToAtlas
 			}
 
 			return dataSaved;
+		}
+
+		/// <summary>
+		/// Fix the drawing points so they don't sit outside the bounds of the image.
+		/// </summary>
+		private void fixDrawingPoints()
+		{
+			// The X and Y positions can't be less than 0,0.
+			if (drawingStart.X < 0)
+			{
+				drawingStart.X = 0;
+			}
+			if (drawingStart.Y < 0)
+			{
+				drawingStart.Y = 0;
+			}
+			if (drawingEnd.X < 0)
+			{
+				drawingEnd.X = 0;
+			}
+			if (drawingEnd.Y < 0)
+			{
+				drawingEnd.Y = 0;
+			}
+
+			// The X and Y positions can't be larger than the image (-1 because zero-based).
+			if (drawingStart.X >= originalImage.Size.Width)
+			{
+				drawingStart.X = originalImage.Size.Width - 1;
+			}
+			if (drawingStart.Y >= originalImage.Size.Height)
+			{
+				drawingStart.Y = originalImage.Size.Height - 1;
+			}
+			if (drawingEnd.X >= originalImage.Size.Width)
+			{
+				drawingEnd.X = originalImage.Size.Width - 1;
+			}
+			if (drawingEnd.Y >= originalImage.Size.Height)
+			{
+				drawingEnd.Y = originalImage.Size.Height - 1;
+			}
 		}
 
 		/// <summary>
