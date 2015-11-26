@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -13,6 +14,15 @@ namespace ManualSpriteSheetToAtlas
 {
 	public partial class Form1 : Form
 	{
+		/// <summary>
+		/// When not explicitly named, prefix to use when automatically giving a sprite a name.
+		/// </summary>
+		private string namingPrefix;
+		/// <summary>
+		/// Number of sprites defined. Used when automatically giving a sprite a name.
+		/// </summary>
+		private int definedSprites;
+
 		/// <summary>
 		/// Original image the user selected.
 		/// </summary>
@@ -96,6 +106,8 @@ namespace ManualSpriteSheetToAtlas
 				= string.Empty;
 
 			toolStripStatusLabelZoom.Text = string.Format("Zoom: {0}", zoomFactor);
+
+			namingPrefix = ConfigurationManager.AppSettings["DefaultNamingPrefix"] ?? "";
 		}
 
 		private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -126,6 +138,7 @@ namespace ManualSpriteSheetToAtlas
 
 					// They've loaded an image, so clear the output if there is any.
 					textBoxOutput.Text = "";
+					definedSprites = 0;
 					hasUnsavedChanges = false;
 
 					newImage.Dispose();
@@ -281,7 +294,8 @@ namespace ManualSpriteSheetToAtlas
 			{
 				fixDrawingPoints();
 
-				textBoxOutput.Text += string.Format("{0} x {1}", drawingStart, drawingEnd);
+				definedSprites++;
+				textBoxOutput.Text += string.Format("{0}{1}{2} {3} x {4}{2}", namingPrefix, definedSprites, Environment.NewLine, drawingStart, drawingEnd);
 
 				hasUnsavedChanges = true;
 
