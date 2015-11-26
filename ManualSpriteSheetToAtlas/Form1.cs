@@ -21,8 +21,9 @@ namespace ManualSpriteSheetToAtlas
 		/// Image displayed by the main display.
 		/// </summary>
 		private Bitmap displayedImage;
-
-		private Bitmap zoomedImage;
+		/// <summary>
+		/// Image displayed in the preview when moving the cursor. Provides a zoomed-in preview to aid with selection.
+		/// </summary>
 		private Bitmap croppedImage;
 
 		private Point pictureCursorPosition;
@@ -121,8 +122,6 @@ namespace ManualSpriteSheetToAtlas
 				{
 					originalImage = (Image)newImage.Clone();
 
-					zoomedImage = new Bitmap(panelZoom.Width, panelZoom.Height, originalImage.PixelFormat);
-
 					imageLoaded = displayMainImage();
 
 					// They've loaded an image, so clear the output if there is any.
@@ -166,7 +165,7 @@ namespace ManualSpriteSheetToAtlas
 		/// </summary>
 		private void updateZoomView()
 		{
-			if (zoomedImage != null)
+			if (croppedImage != null)
 			{
 				pictureCursorPosition = pictureBoxOriginalImage.PointToClient(Cursor.Position);
 
