@@ -295,7 +295,7 @@ namespace ManualSpriteSheetToAtlas
 				fixDrawingPoints();
 
 				definedSprites++;
-				textBoxOutput.Text += string.Format("{0}{1}{2} {3} x {4}{2}", namingPrefix, definedSprites, Environment.NewLine, drawingStart, drawingEnd);
+				textBoxOutput.Text += string.Format("{0}{1}:{2} x {3}{4}", namingPrefix, definedSprites, drawingStart, drawingEnd, Environment.NewLine);
 
 				hasUnsavedChanges = true;
 
