@@ -126,6 +126,7 @@ namespace ManualSpriteSheetToAtlas
 
 					// They've loaded an image, so clear the output if there is any.
 					textBoxOutput.Text = "";
+					hasUnsavedChanges = false;
 
 					newImage.Dispose();
 				}
@@ -154,7 +155,6 @@ namespace ManualSpriteSheetToAtlas
 				toolStripStatusLabelImageSize.Text = string.Format("Image size: {0}", originalImage.Size.ToString());
 
 				imageDisplayed = true;
-				hasUnsavedChanges = false;
 			}
 
 			return imageDisplayed;
