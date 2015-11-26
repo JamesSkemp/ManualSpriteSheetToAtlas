@@ -193,7 +193,6 @@ namespace ManualSpriteSheetToAtlas
 		{
 			drawingStart = getDrawingCursor();
 			isDrawing = true;
-			// TODO start drawing our rectangle here
 		}
 
 		private void pictureBoxOriginalImage_MouseMove(object sender, MouseEventArgs e)
@@ -222,7 +221,7 @@ namespace ManualSpriteSheetToAtlas
 
 		private void pictureBoxOriginalImage_Paint(object sender, PaintEventArgs e)
 		{
-			// TODO drawi rectangle here
+			// TODO draw rectangle here
 
 		}
 
@@ -236,12 +235,18 @@ namespace ManualSpriteSheetToAtlas
 			panelZoom.BackgroundImage = null;
 		}
 
+		/// <summary>
+		/// Zoom in on the original image.
+		/// </summary>
 		private void inToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			zoomFactor += 1;
 			zoomOriginal();
 		}
 
+		/// <summary>
+		/// Zoom out of the original image.
+		/// </summary>
 		private void outToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			zoomFactor -= 1;
@@ -259,7 +264,6 @@ namespace ManualSpriteSheetToAtlas
 		{
 			toolStripStatusLabelZoom.Text = string.Format("Zoom: {0}", zoomFactor);
 
-			// TODO update all existing rectangles accordingly.
 			displayMainImage();
 
 			// You can't zoom out any further than the original size.
