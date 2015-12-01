@@ -233,16 +233,13 @@ namespace ManualSpriteSheetToAtlas
 				drawingTempPoint = getDrawingCursor();
 				updateCurrentDrawingRectangle();
 				
-				Console.WriteLine(currentDrawingRectangle);
-				// TODO continue drawing our rectangle here, if they started drawing
-
 				Refresh();
 			}
 		}
 
 		private void pictureBoxOriginalImage_MouseUp(object sender, MouseEventArgs e)
 		{
-			// TODO finish drawing our rectangle here, if they started
+			// They've finished drawing, so save the sprite defintion.
 			if (isDrawing)
 			{
 				drawingEnd = getDrawingCursor();
@@ -255,7 +252,7 @@ namespace ManualSpriteSheetToAtlas
 
 		private void pictureBoxOriginalImage_Paint(object sender, PaintEventArgs e)
 		{
-			// TODO draw rectangle here
+			// The rectangle is drawn here.
 			using (var pen = new Pen(Color.Red, 1))
 			{
 				e.Graphics.DrawRectangle(pen, currentDrawingRectangle);
@@ -391,6 +388,7 @@ namespace ManualSpriteSheetToAtlas
 		/// </summary>
 		private void normalizePoints()
 		{
+			// The X coordinate should be closer to the origin.
 			if (drawingStart.X > drawingEnd.X)
 			{
 				int tempVariable = drawingStart.X;
@@ -398,6 +396,7 @@ namespace ManualSpriteSheetToAtlas
 				drawingEnd.X = tempVariable;
 			}
 
+			// The Y coordinate should be closer to the origin.
 			if (drawingStart.Y > drawingEnd.Y)
 			{
 				int tempVariable = drawingStart.Y;
@@ -426,6 +425,7 @@ namespace ManualSpriteSheetToAtlas
 		/// </summary>
 		private void updateCurrentDrawingRectangle()
 		{
+			// We need to define a starting point and then a width. This logic makes sure the starting point is closest to the origin.
 			if (drawingStart.X < drawingTempPoint.X)
 			{
 				currentDrawingRectangle.X = drawingStart.X;
