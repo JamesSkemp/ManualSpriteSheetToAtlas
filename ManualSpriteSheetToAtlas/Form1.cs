@@ -108,6 +108,9 @@ namespace ManualSpriteSheetToAtlas
 			toolStripStatusLabelZoom.Text = string.Format("Zoom: {0}", zoomFactor);
 
 			namingPrefix = ConfigurationManager.AppSettings["DefaultNamingPrefix"] ?? "";
+
+			// They can't save until they've made changes.
+			saveToolStripMenuItem.Enabled = false;
 		}
 
 		private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -140,6 +143,7 @@ namespace ManualSpriteSheetToAtlas
 					textBoxOutput.Text = "";
 					definedSprites = 0;
 					hasUnsavedChanges = false;
+					saveToolStripMenuItem.Enabled = false;
 
 					newImage.Dispose();
 				}
@@ -322,6 +326,7 @@ namespace ManualSpriteSheetToAtlas
 				textBoxOutput.Text += string.Format("{0}{1}:{2} x {3}{4}", namingPrefix, definedSprites, drawingStart, drawingEnd, Environment.NewLine);
 
 				hasUnsavedChanges = true;
+				saveToolStripMenuItem.Enabled = true;
 
 				drawingStart = Point.Empty;
 				drawingEnd = Point.Empty;
@@ -428,6 +433,22 @@ namespace ManualSpriteSheetToAtlas
 			currentDrawingRectangle.Y *= zoomFactor;
 			currentDrawingRectangle.Width *= zoomFactor;
 			currentDrawingRectangle.Height *= zoomFactor;
+		}
+
+		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			SaveFileDialog saveFileDialog = new SaveFileDialog();
+			saveFileDialog.Filter = "Phaser JSON|*.json";
+			saveFileDialog.Title = "Save Data";
+			saveFileDialog.ShowDialog();
+
+			if (saveFileDialog.FileName != "")
+			{
+				// TODO save changes.
+
+				// TODO make sure we mark changes as saved.
+				//hasUnsavedChanges = false;
+			}
 		}
 	}
 }
