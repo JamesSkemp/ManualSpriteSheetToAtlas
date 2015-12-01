@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ManualSpriteSheetToAtlas.Converters;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,22 @@ namespace ManualSpriteSheetToAtlas.Models
 	public class AtlasDefinition
 	{
 		/// <summary>
+		/// Name of the original file name.
+		/// </summary>
+		public string OriginalImageName { get; set; }
+		/// <summary>
+		/// Width of the original image.
+		/// </summary>
+		public int OriginalImageWidth { get; set; }
+		/// <summary>
+		/// Height of the original image.
+		/// </summary>
+		public int OriginalImageHeight { get; set; }
+		/// <summary>
+		/// Format of the original image.
+		/// </summary>
+		public System.Drawing.Imaging.PixelFormat OriginalImageFormat { get; set; }
+		/// <summary>
 		/// Individual sprites within the image.
 		/// </summary>
 		public List<SpriteDefinition> SpriteDefinitions { get; set; }
@@ -26,7 +43,7 @@ namespace ManualSpriteSheetToAtlas.Models
 		{
 			string output = "";
 
-			output = JsonConvert.SerializeObject(this, Formatting.Indented);
+			output = JsonConvert.SerializeObject(this, Formatting.Indented, new PhaserJsonConverter());
 
 			return output;
 		}

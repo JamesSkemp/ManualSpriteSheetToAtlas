@@ -150,7 +150,12 @@ namespace ManualSpriteSheetToAtlas
 					// They've loaded an image, so clear the output if there is any.
 					textBoxOutput.Text = "";
 					definedSprites = 0;
-					atlasDefinitions = new AtlasDefinition();
+					atlasDefinitions = new AtlasDefinition() {
+						OriginalImageName = originalImageFileName,
+						OriginalImageWidth = originalImage.Width,
+						OriginalImageHeight = originalImage.Height,
+						OriginalImageFormat = originalImage.PixelFormat
+					};
 					hasUnsavedChanges = false;
 					saveToolStripMenuItem.Enabled = false;
 
