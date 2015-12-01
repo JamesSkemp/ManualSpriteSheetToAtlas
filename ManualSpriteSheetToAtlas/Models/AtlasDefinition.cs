@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,15 @@ namespace ManualSpriteSheetToAtlas.Models
 		public AtlasDefinition()
 		{
 			SpriteDefinitions = new List<SpriteDefinition>();
+		}
+
+		public string SerializeToPhaserJson()
+		{
+			string output = "";
+
+			output = JsonConvert.SerializeObject(this, Formatting.Indented);
+
+			return output;
 		}
 	}
 }

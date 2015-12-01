@@ -481,6 +481,10 @@ namespace ManualSpriteSheetToAtlas
 				return;
 			}
 
+			var dataSaved = false;
+
+			MessageBox.Show("There are " + atlasDefinitions.SpriteDefinitions.Count + " sprites to save.");
+
 			using (var saveFileDialog = new SaveFileDialog())
 			{
 				saveFileDialog.Filter = "Phaser JSON|*.json";
@@ -489,13 +493,20 @@ namespace ManualSpriteSheetToAtlas
 
 				if (saveFileDialog.FileName != "")
 				{
-					// TODO save changes.
+					string output = atlasDefinitions.SerializeToPhaserJson();
 
-					// TODO make sure we mark changes as saved.
-					//hasUnsavedChanges = false;
+					if (!string.IsNullOrWhiteSpace(output))
+					{
+						File.WriteAllText(saveFileDialog.FileName, output);
+						dataSaved = true;
+						hasUnsavedChanges = false;
+					}
 				}
+			}
 
-				MessageBox.Show("There are " + atlasDefinitions.SpriteDefinitions.Count + " sprites to save.");
+			if (!dataSaved)
+			{
+				MessageBox.Show("There was an error saving. Please try again.");
 			}
 		}
 	}
