@@ -488,8 +488,6 @@ namespace ManualSpriteSheetToAtlas
 
 			var dataSaved = false;
 
-			MessageBox.Show("There are " + atlasDefinitions.SpriteDefinitions.Count + " sprites to save.");
-
 			using (var saveFileDialog = new SaveFileDialog())
 			{
 				saveFileDialog.Filter = "Phaser JSON|*.json";
