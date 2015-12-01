@@ -449,7 +449,7 @@ namespace ManualSpriteSheetToAtlas
 			}
 			else if (drawingStart.Y > drawingTempPoint.Y)
 			{
-				currentDrawingRectangle.Y = drawingEnd.Y;
+				currentDrawingRectangle.Y = drawingTempPoint.Y;
 				currentDrawingRectangle.Height = drawingStart.Y - drawingTempPoint.Y;
 			}
 			else
