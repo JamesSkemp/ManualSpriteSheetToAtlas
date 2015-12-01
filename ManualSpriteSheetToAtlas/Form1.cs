@@ -205,6 +205,7 @@ namespace ManualSpriteSheetToAtlas
 		{
 			drawingStart = getDrawingCursor();
 			isDrawing = true;
+			currentDrawingRectangle = new Rectangle();
 		}
 
 		private void pictureBoxOriginalImage_MouseMove(object sender, MouseEventArgs e)
@@ -213,8 +214,12 @@ namespace ManualSpriteSheetToAtlas
 			if (isDrawing)
 			{
 				drawingTempPoint = getDrawingCursor();
+				updateCurrentDrawingRectangle();
+				
+				Console.WriteLine(currentDrawingRectangle);
 				// TODO continue drawing our rectangle here, if they started drawing
 
+				Refresh();
 			}
 		}
 
@@ -234,7 +239,10 @@ namespace ManualSpriteSheetToAtlas
 		private void pictureBoxOriginalImage_Paint(object sender, PaintEventArgs e)
 		{
 			// TODO draw rectangle here
-
+			using (var pen = new Pen(Color.Red, 1))
+			{
+				e.Graphics.DrawRectangle(pen, currentDrawingRectangle);
+			}
 		}
 
 		private void pictureBoxOriginalImage_MouseEnter(object sender, EventArgs e)
@@ -361,6 +369,49 @@ namespace ManualSpriteSheetToAtlas
 			cursor.Y /= zoomFactor;
 
 			return cursor;
+		}
+
+		/// <summary>
+		/// Update the rectangle used for the current drawing around a sprite.
+		/// </summary>
+		private void updateCurrentDrawingRectangle()
+		{
+			if (drawingStart.X < drawingTempPoint.X)
+			{
+				currentDrawingRectangle.X = drawingStart.X;
+				currentDrawingRectangle.Width = drawingTempPoint.X - drawingStart.X;
+			}
+			else if (drawingStart.X > drawingTempPoint.X)
+			{
+				currentDrawingRectangle.X = drawingTempPoint.X;
+				currentDrawingRectangle.Width = drawingStart.X - drawingTempPoint.X;
+			}
+			else
+			{
+				currentDrawingRectangle.X = drawingStart.X;
+				currentDrawingRectangle.Width = 0;
+			}
+
+			if (drawingStart.Y < drawingTempPoint.Y)
+			{
+				currentDrawingRectangle.Y = drawingStart.Y;
+				currentDrawingRectangle.Height = drawingTempPoint.Y - drawingStart.Y;
+			}
+			else if (drawingStart.Y > drawingTempPoint.Y)
+			{
+				currentDrawingRectangle.Y = drawingEnd.Y;
+				currentDrawingRectangle.Height = drawingStart.Y - drawingTempPoint.Y;
+			}
+			else
+			{
+				currentDrawingRectangle.Y = drawingStart.Y;
+				currentDrawingRectangle.Height = 0;
+			}
+
+			currentDrawingRectangle.X *= zoomFactor;
+			currentDrawingRectangle.Y *= zoomFactor;
+			currentDrawingRectangle.Width *= zoomFactor;
+			currentDrawingRectangle.Height *= zoomFactor;
 		}
 	}
 }
