@@ -284,6 +284,9 @@ namespace ManualSpriteSheetToAtlas
 		{
 			toolStripStatusLabelZoom.Text = string.Format("Zoom: {0}", zoomFactor);
 
+			// Reset the rectangle so it doesn't display.
+			currentDrawingRectangle = new Rectangle();
+
 			displayMainImage();
 
 			// You can't zoom out any further than the original size.
