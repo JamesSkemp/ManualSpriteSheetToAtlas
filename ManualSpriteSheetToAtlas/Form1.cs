@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManualSpriteSheetToAtlas.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -27,6 +28,10 @@ namespace ManualSpriteSheetToAtlas
 		/// Original image the user selected.
 		/// </summary>
 		private Image originalImage;
+		/// <summary>
+		/// File name of the original image, used when saving the atlas file.
+		/// </summary>
+		private string originalImageFileName;
 		/// <summary>
 		/// Image displayed by the main display.
 		/// </summary>
@@ -73,7 +78,7 @@ namespace ManualSpriteSheetToAtlas
 		/// </summary>
 		private Rectangle currentDrawingRectangle;
 
-		private List<SpriteDefinition> spriteDefinitions;
+		private AtlasDefinition atlasDefinitions;
 
 		public Form1()
 		{
@@ -138,13 +143,14 @@ namespace ManualSpriteSheetToAtlas
 				if (newImage != null)
 				{
 					originalImage = (Image)newImage.Clone();
+					originalImageFileName = Path.GetFileName(openFileDialog1.FileName);
 
 					imageLoaded = displayMainImage();
 
 					// They've loaded an image, so clear the output if there is any.
 					textBoxOutput.Text = "";
 					definedSprites = 0;
-					spriteDefinitions = new List<SpriteDefinition>();
+					atlasDefinitions = new AtlasDefinition();
 					hasUnsavedChanges = false;
 					saveToolStripMenuItem.Enabled = false;
 
@@ -328,8 +334,11 @@ namespace ManualSpriteSheetToAtlas
 				string spriteName = string.Format("{0}{1}", namingPrefix, definedSprites);
 				textBoxOutput.Text += string.Format("{0}:{1} x {2}{3}", spriteName, drawingStart, drawingEnd, Environment.NewLine);
 
-				//spriteDefinitions.Add(new SpriteDefinition(spriteName, 
-
+				// Add our new point to 
+				atlasDefinitions.SpriteDefinitions.Add(new SpriteDefinition(
+					definedSprites, spriteName, drawingStart.X, drawingStart.Y
+					// Width and height of the sprite based upon starting/ending points.
+					, drawingEnd.X - drawingStart.X, drawingEnd.Y - drawingEnd.Y));
 
 				hasUnsavedChanges = true;
 				saveToolStripMenuItem.Enabled = true;
@@ -466,7 +475,7 @@ namespace ManualSpriteSheetToAtlas
 
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (spriteDefinitions == null || !spriteDefinitions.Any())
+			if (!atlasDefinitions.SpriteDefinitions.Any())
 			{
 				// There's nothing to save. We shouldn't hit this circumstance, but in case we do, return.
 				return;
@@ -485,6 +494,8 @@ namespace ManualSpriteSheetToAtlas
 					// TODO make sure we mark changes as saved.
 					//hasUnsavedChanges = false;
 				}
+
+				MessageBox.Show("There are " + atlasDefinitions.SpriteDefinitions.Count + " sprites to save.");
 			}
 		}
 	}

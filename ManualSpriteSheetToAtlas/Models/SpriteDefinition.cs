@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ManualSpriteSheetToAtlas
+namespace ManualSpriteSheetToAtlas.Models
 {
 	/// <summary>
 	/// Definition of an individual sprite.
