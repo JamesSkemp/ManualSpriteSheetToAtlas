@@ -338,7 +338,7 @@ namespace ManualSpriteSheetToAtlas
 				atlasDefinitions.SpriteDefinitions.Add(new SpriteDefinition(
 					definedSprites, spriteName, drawingStart.X, drawingStart.Y
 					// Width and height of the sprite based upon starting/ending points.
-					, drawingEnd.X - drawingStart.X, drawingEnd.Y - drawingEnd.Y));
+					, drawingEnd.X - drawingStart.X, drawingEnd.Y - drawingStart.Y));
 
 				hasUnsavedChanges = true;
 				saveToolStripMenuItem.Enabled = true;
