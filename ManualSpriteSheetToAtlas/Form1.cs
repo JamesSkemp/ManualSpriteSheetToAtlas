@@ -203,6 +203,16 @@ namespace ManualSpriteSheetToAtlas
 
 		private void pictureBoxOriginalImage_MouseDown(object sender, MouseEventArgs e)
 		{
+			if (e.Button == MouseButtons.Right && isDrawing)
+			{
+				// We're drawing and they used the right mouse button. Cancel the drawing.
+				drawingStart = new Point();
+				isDrawing = false;
+				currentDrawingRectangle = new Rectangle();
+				Refresh();
+				return;
+			}
+
 			drawingStart = getDrawingCursor();
 			isDrawing = true;
 			currentDrawingRectangle = new Rectangle();
@@ -301,7 +311,10 @@ namespace ManualSpriteSheetToAtlas
 		{
 			bool dataSaved = false;
 
-			if (!drawingStart.IsEmpty || !drawingEnd.IsEmpty)
+			if (
+				(!drawingStart.IsEmpty || !drawingEnd.IsEmpty)
+				&& drawingStart != drawingEnd
+				)
 			{
 				fixDrawingPoints();
 
