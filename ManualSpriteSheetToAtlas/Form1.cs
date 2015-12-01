@@ -73,6 +73,8 @@ namespace ManualSpriteSheetToAtlas
 		/// </summary>
 		private Rectangle currentDrawingRectangle;
 
+		private List<SpriteDefinition> spriteDefinitions;
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -142,6 +144,7 @@ namespace ManualSpriteSheetToAtlas
 					// They've loaded an image, so clear the output if there is any.
 					textBoxOutput.Text = "";
 					definedSprites = 0;
+					spriteDefinitions = new List<SpriteDefinition>();
 					hasUnsavedChanges = false;
 					saveToolStripMenuItem.Enabled = false;
 
@@ -321,9 +324,15 @@ namespace ManualSpriteSheetToAtlas
 				)
 			{
 				fixDrawingPoints();
+				normalizePoints();
 
 				definedSprites++;
-				textBoxOutput.Text += string.Format("{0}{1}:{2} x {3}{4}", namingPrefix, definedSprites, drawingStart, drawingEnd, Environment.NewLine);
+				// TODO eventually have the user be able to set this.
+				string spriteName = string.Format("{0}{1}", namingPrefix, definedSprites);
+				textBoxOutput.Text += string.Format("{0}:{1} x {2}{3}", spriteName, drawingStart, drawingEnd, Environment.NewLine);
+
+				//spriteDefinitions.Add(new SpriteDefinition(spriteName, 
+
 
 				hasUnsavedChanges = true;
 				saveToolStripMenuItem.Enabled = true;
@@ -374,6 +383,26 @@ namespace ManualSpriteSheetToAtlas
 			if (drawingEnd.Y >= originalImage.Size.Height)
 			{
 				drawingEnd.Y = originalImage.Size.Height - 1;
+			}
+		}
+
+		/// <summary>
+		/// Makes sure the starting point is closer to {0, 0} than the ending point.
+		/// </summary>
+		private void normalizePoints()
+		{
+			if (drawingStart.X > drawingEnd.X)
+			{
+				int tempVariable = drawingStart.X;
+				drawingStart.X = drawingEnd.X;
+				drawingEnd.X = tempVariable;
+			}
+
+			if (drawingStart.Y > drawingEnd.Y)
+			{
+				int tempVariable = drawingStart.Y;
+				drawingStart.Y = drawingEnd.Y;
+				drawingEnd.Y = tempVariable;
 			}
 		}
 
@@ -437,17 +466,25 @@ namespace ManualSpriteSheetToAtlas
 
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			SaveFileDialog saveFileDialog = new SaveFileDialog();
-			saveFileDialog.Filter = "Phaser JSON|*.json";
-			saveFileDialog.Title = "Save Data";
-			saveFileDialog.ShowDialog();
-
-			if (saveFileDialog.FileName != "")
+			if (spriteDefinitions == null || !spriteDefinitions.Any())
 			{
-				// TODO save changes.
+				// There's nothing to save. We shouldn't hit this circumstance, but in case we do, return.
+				return;
+			}
 
-				// TODO make sure we mark changes as saved.
-				//hasUnsavedChanges = false;
+			using (var saveFileDialog = new SaveFileDialog())
+			{
+				saveFileDialog.Filter = "Phaser JSON|*.json";
+				saveFileDialog.Title = "Save Data";
+				saveFileDialog.ShowDialog();
+
+				if (saveFileDialog.FileName != "")
+				{
+					// TODO save changes.
+
+					// TODO make sure we mark changes as saved.
+					//hasUnsavedChanges = false;
+				}
 			}
 		}
 	}
